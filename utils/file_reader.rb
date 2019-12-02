@@ -9,4 +9,9 @@ class FileReader
     end
     input
   end
+
+  def self.read_integers(file_name)
+    File.read(file_name).split(",").map(&:strip)
+  end
+
 end
