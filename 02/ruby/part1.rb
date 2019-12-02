@@ -12,25 +12,26 @@ class Part1
     @input[2] = 2
     @input.each_slice(4) do |input_batch|
       op_code = input_batch[0].to_i
-      if op_code == 99
-        return @input
-      else
-        position1 = input_batch[1].to_i
-        operator1 = @input[position1].to_i
-        position2 = input_batch[2].to_i
-        operator2 = @input[position2].to_i
-        result = calculate_result(operator1, operator2, op_code)
-        to_index = input_batch[3].to_i
-        @input[to_index] = result
-      end
+      return @input if op_code == 99
+
+      operand1 = determine_operand(1, input_batch)
+      operand2 = determine_operand(2, input_batch)
+      result = calculate_result(operand1, operand2, op_code)
+      to_index = input_batch[3].to_i
+      @input[to_index] = result
     end
     @input
   end
 
-  def calculate_result(op1, op2, op)
-    if op == 1
+  def determine_operand(index, input_batch)
+    position = input_batch[index].to_i
+    @input[position].to_i
+  end
+
+  def calculate_result(op1, op2, op_code)
+    if op_code == 1
       op1 + op2
-    elsif op == 2
+    elsif op_code == 2
       op1 * op2
     else
       raise UnknownOperator
