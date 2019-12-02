@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../../utils/file_reader.rb'
 
 class UnknownOperator < StandardError
@@ -22,14 +24,14 @@ class Part1
         @input[to_index] = result
       end
     end
-   return @input
+    @input
   end
 
   def calculate_result(op1, op2, op)
     if op == 1
-      return op1 + op2
+      op1 + op2
     elsif op == 2
-      return op1 * op2
+      op1 * op2
     else
       raise UnknownOperator
     end

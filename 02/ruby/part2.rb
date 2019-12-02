@@ -1,23 +1,23 @@
+# frozen_string_literal: true
+
 require '../../utils/file_reader.rb'
 
 class UnknownOperator < StandardError
 end
 
 class Part2
-
   def determine_noun_and_verb
     noun = 0
-    while noun <= 99 do
+    while noun <= 99
       verb = 0
-      while verb <= 99 do
+      while verb <= 99
         result = calculate_program(noun, verb)
         puts "result 0 #{result[0]}"
-        if result[0] == 19690720
-          return [noun, verb]
-        end
-        verb +=1
+        return [noun, verb] if result[0] == 19_690_720
+
+        verb += 1
       end
-      noun +=1
+      noun += 1
     end
   end
 
@@ -39,14 +39,14 @@ class Part2
         memory[to_index] = result
       end
     end
-    return memory
+    memory
   end
 
   def calculate_result(op1, op2, op)
     if op == 1
-      return op1 + op2
+      op1 + op2
     elsif op == 2
-      return op1 * op2
+      op1 * op2
     else
       raise UnknownOperator
     end
@@ -54,7 +54,7 @@ class Part2
 end
 
 p = Part2.new
-puts "here"
+puts 'here'
 result = p.determine_noun_and_verb
 puts "noun #{result[0]}"
 puts "verb #{result[1]}"
